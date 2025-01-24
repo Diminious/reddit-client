@@ -5,6 +5,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "cra-template-redux": "2.0.0",
+    "dayjs": "^1.11.13",
+    "moment": "^2.30.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",

@@ -22,7 +22,7 @@ const Header = () => {
 
     return (
         <header>
-            <p>Reddit Client</p>
+            <p>Reddit Viewer</p>
             <img src="../../reddit-logo.svg" alt="reddit logo"/>
             <form className="search" >
                 <input type="text" placeholder="Search something!" value={searchTermLocal} onChange={onSearchTermChange}/>

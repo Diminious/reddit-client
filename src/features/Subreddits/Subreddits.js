@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Card from "../../component/Card/Card";
-// import './Subreddits.css';
+import './Subreddits.css';
 
 const testSubsList = [
     {
