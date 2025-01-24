@@ -25,3 +25,14 @@ main {
   min-width: calc(30% - 2em);
 }
 
+main hr {
+  /* border-color: #121212; */
+  border: solid #1F1F1F 1px;
+  margin: 0 1em;
+}
+
+.comments-aside hr {
+  border: solid #292929 1px;
+  margin: 0 1em;
+}
+
