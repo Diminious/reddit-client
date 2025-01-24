@@ -35,28 +35,28 @@ const redditSlice = createSlice({
             state.selectedSubreddit = action.payload;
         },
         //TODO Showing Comments
-        // toggleShowingComments(state, action) {
-        //   state.posts[action.payload].showingComments = !state.posts[action.payload]
-        //     .showingComments;
-        // },
-        // startGetComments(state, action) {
-        //   // If we're hiding comment, don't fetch the comments.
-        //   state.posts[action.payload].showingComments = !state.posts[action.payload]
-        //     .showingComments;
-        //   if (!state.posts[action.payload].showingComments) {
-        //     return;
-        //   }
-        //   state.posts[action.payload].loadingComments = true;
-        //   state.posts[action.payload].error = false;
-        // },
-        // getCommentsSuccess(state, action) {
-        //   state.posts[action.payload.index].loadingComments = false;
-        //   state.posts[action.payload.index].comments = action.payload.comments;
-        // },
-        // getCommentsFailed(state, action) {
-        //   state.posts[action.payload].loadingComments = false;
-        //   state.posts[action.payload].error = true;
-        // },
+        toggleShowingComments(state, action) {
+          state.posts[action.payload].showingComments = !state.posts[action.payload]
+            .showingComments;
+        },
+        startGetComments(state, action) {
+          // If we're hiding comment, don't fetch the comments.
+          state.posts[action.payload].showingComments = !state.posts[action.payload]
+            .showingComments;
+          if (!state.posts[action.payload].showingComments) {
+            return;
+          }
+          state.posts[action.payload].loadingComments = true;
+          state.posts[action.payload].error = false;
+        },
+        getCommentsSuccess(state, action) {
+          state.posts[action.payload.index].loadingComments = false;
+          state.posts[action.payload.index].comments = action.payload.comments;
+        },
+        getCommentsFailed(state, action) {
+          state.posts[action.payload].loadingComments = false;
+          state.posts[action.payload].error = true;
+        },
     }
 });
 
@@ -67,10 +67,10 @@ export const {
     startGetPosts,
     setSearchTerm,
     setSelectedSubreddit,
-//   toggleShowingComments,
-//   getCommentsFailed,
-//   getCommentsSuccess,
-//   startGetComments,
+    toggleShowingComments,
+    getCommentsFailed,
+    getCommentsSuccess,
+    startGetComments,
 } = redditSlice.actions;
 
 export default redditSlice.reducer
@@ -94,3 +94,30 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
         dispatch(getPostsFailed());
     }
 };
+
+export const fetchComments = (index, permalink) => async (dispatch) => {
+    try {
+      dispatch(startGetComments(index));
+      const comments = await getPostComments(permalink);
+      dispatch(getCommentsSuccess({ index, comments }));
+    } catch (error) {
+      dispatch(getCommentsFailed(index));
+    }
+};
+  
+const selectPosts = (state) => state.reddit.posts;
+const selectSearchTerm = (state) => state.reddit.searchTerm;
+export const selectSelectedSubreddit = (state) => state.reddit.selectedSubreddit;
+  
+export const selectFilteredPosts = createSelector(
+    [selectPosts, selectSearchTerm],
+    (posts, searchTerm) => {
+        if (searchTerm !== '') {
+            return posts.filter((post) =>
+                post.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        }
+  
+        return posts;
+    }
+);
