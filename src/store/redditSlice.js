@@ -6,7 +6,7 @@ const initialState = {
     error: false,
     isLoading: false,
     searchTerm: '',
-    selectedSubreddit: "/r/pics", //default subreddit to appear on the page
+    selectedSubreddit: "/r/HonkaiStarRail_leaks", //default subreddit to appear on the page
 };
 
 const redditSlice = createSlice({

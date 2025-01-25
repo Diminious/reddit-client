@@ -18,6 +18,10 @@ article h3 {
     margin: 1rem 0;
 }
 
+.post-image {
+    max-width: 100%;
+}
+
 .post-details {
     display: flex;
     justify-content: space-between;
