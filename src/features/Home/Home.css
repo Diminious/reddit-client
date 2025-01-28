@@ -4,6 +4,7 @@ main {
 
 .comments-aside {
     min-width: calc(30% - 2em);
+    align-self: flex-start;
 }
   
 main hr {

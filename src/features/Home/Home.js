@@ -1,14 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../Post/Post";
 import Comment from "../Comment/Comment";
-import { fetchPosts, selectFilteredPosts, setSearchTerm, fetchComments } from "../../store/redditSlice";
+import { fetchPosts, selectFilteredPosts, setSearchTerm } from "../../store/redditSlice";
+import { fetchComments } from "../../store/commentSlice";
 import './Home.css'
 
 const Home = () => {
     const reddit = useSelector((state) => state.reddit);
     const { isLoading, error, searchTerm, selectedSubreddit } = reddit;
     const posts = useSelector(selectFilteredPosts);
+    const postComments = useSelector((state) => state.comments)
+    const { commentsLoading, commentsError } = postComments;
+    const commentsState = useSelector((state) => state.comments.comments)
     const dispatch = useDispatch();
 
     const [ selectedPost, setSelectedPost ] = useState(null);
@@ -19,21 +23,20 @@ const Home = () => {
 
     //when clicking a post gets comments and displays them
     const onClickComments = (post) => {
-        // console.log("OnClick");
         
         setSelectedPost(post)
-        const index = post.permalink;
-        console.log(index);
+        // const index = post.permalink;
+        // console.log(index);
         
 
-        const getComments = (permalink) => {
-            console.log("getComments");
+        // const getComments = (permalink) => {
+        //     console.log("getComments");
             
-            dispatch(fetchComments(index, permalink));
-        }
+        //     dispatch(fetchComments(index, permalink));
+        // }
 
 
-        return getComments;
+        // return getComments;
     }
 
     useEffect(() => {
@@ -44,15 +47,30 @@ const Home = () => {
     }, [selectedPost, dispatch])
 
     const renderComments = () => {
-        // if(selectedPost === null) return <div></div>
+        if(selectedPost === null) return (
+            <div>
+                <p>Select a post to view comments.</p>
+            </div>
+        )
 
-        console.log('RenderComments');
+        if(commentsError) return (
+            <div>
+                <p>Error loading comments.</p>
+            </div>
+        )
+
+        if(commentsLoading) return (
+            <div>
+                <p>Loading comments...</p>
+            </div>
+        )
+
         
 
         return (
             <div>
                 <hr/>
-                {selectedPost.comments.map((comment) => (
+                {commentsState.comments?.map((comment) => (
                     <Comment comment={comment} key={comment.id} />
                 ))}
             </div>
@@ -101,8 +119,10 @@ const Home = () => {
                 })}
             </main>
             <aside className='comments-aside'>
-                <h2>Comments</h2>
-                {selectedPost !== null? renderComments(): <div></div>}
+                <div>
+                    <h2>Comments</h2>
+                    {renderComments()}
+                </div>
             </aside>
             
         </>
