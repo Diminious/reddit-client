@@ -14,10 +14,8 @@ const Subreddits = () => {
     const selectedSubreddit = useSelector(selectSelectedSubreddit);
 
     useEffect(() => {
-        dispatch(fetchSubreddits);
+        dispatch(fetchSubreddits());
     }, [dispatch])
-
-    console.log(subreddits.length)
 
     return (
         <Card className="subreddit-card">

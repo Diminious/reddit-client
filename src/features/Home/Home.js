@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Post from "../Post/Post";
+import Comment from "../Comment/Comment";
 import { fetchPosts, selectFilteredPosts, setSearchTerm, fetchComments } from "../../store/redditSlice";
 import './Home.css'
 
@@ -10,22 +11,58 @@ const Home = () => {
     const posts = useSelector(selectFilteredPosts);
     const dispatch = useDispatch();
 
+    const [ selectedPost, setSelectedPost ] = useState(null);
+
     useEffect(() => {
         dispatch(fetchPosts(selectedSubreddit));
     }, [selectedSubreddit, dispatch])
 
     //when clicking a post gets comments and displays them
-    const onClickComments = (index) => {
+    const onClickComments = (post) => {
+        // console.log("OnClick");
+        
+        setSelectedPost(post)
+        const index = post.permalink;
+        console.log(index);
+        
+
         const getComments = (permalink) => {
+            console.log("getComments");
+            
             dispatch(fetchComments(index, permalink));
         }
+
 
         return getComments;
     }
 
+    useEffect(() => {
+        if (selectedPost === null) return;
+        console.log("Effect: GetComments");
+        
+        dispatch(fetchComments(selectedPost.permalink, selectedPost.permalink));
+    }, [selectedPost, dispatch])
+
+    const renderComments = () => {
+        // if(selectedPost === null) return <div></div>
+
+        console.log('RenderComments');
+        
+
+        return (
+            <div>
+                <hr/>
+                {selectedPost.comments.map((comment) => (
+                    <Comment comment={comment} key={comment.id} />
+                ))}
+            </div>
+        )
+    }
+
+    //Post states
     if (isLoading) {
         return (
-            <p>Loading...</p>
+            <p className="loading-text">Loading...</p>
         )
     }
 
@@ -53,12 +90,21 @@ const Home = () => {
 
     return (
         <>
-            {posts.map((post, index) => (
-                <>
-                    <hr />
-                    <Post key={post.id} post={post} onClickComments={onClickComments(index)} />
-                </>
-            ))}
+            <main>
+                {posts.map((post, index) => {
+                    return (
+                        <>
+                            {index !== 0? <hr/> : null}
+                            <Post key={post.id} post={post} onClickComments={onClickComments}/>
+                        </>
+                    )
+                })}
+            </main>
+            <aside className='comments-aside'>
+                <h2>Comments</h2>
+                {selectedPost !== null? renderComments(): <div></div>}
+            </aside>
+            
         </>
     )
 }

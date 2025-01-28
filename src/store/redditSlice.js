@@ -6,7 +6,7 @@ const initialState = {
     error: false,
     isLoading: false,
     searchTerm: '',
-    selectedSubreddit: "/r/HonkaiStarRail_leaks", //default subreddit to appear on the page
+    selectedSubreddit: "/r/PhoebeMains", //default subreddit to appear on the page
 };
 
 const redditSlice = createSlice({
@@ -40,16 +40,20 @@ const redditSlice = createSlice({
             .showingComments;
         },
         startGetComments(state, action) {
-          // If we're hiding comment, don't fetch the comments.
+        //   If we're hiding comment, don't fetch the comments.
           state.posts[action.payload].showingComments = !state.posts[action.payload]
             .showingComments;
           if (!state.posts[action.payload].showingComments) {
             return;
           }
+            console.log("startGetComments");
+            
           state.posts[action.payload].loadingComments = true;
           state.posts[action.payload].error = false;
         },
         getCommentsSuccess(state, action) {
+            console.log("Success!");
+            
           state.posts[action.payload.index].loadingComments = false;
           state.posts[action.payload.index].comments = action.payload.comments;
         },
@@ -96,11 +100,17 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
 };
 
 export const fetchComments = (index, permalink) => async (dispatch) => {
+    console.log("FetchComments");
+    
     try {
       dispatch(startGetComments(index));
       const comments = await getPostComments(permalink);
+      console.warn("Comments: " + comments);
+      
       dispatch(getCommentsSuccess({ index, comments }));
     } catch (error) {
+        console.error(error);
+        
       dispatch(getCommentsFailed(index));
     }
 };

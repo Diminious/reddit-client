@@ -5,10 +5,10 @@ import './Post.css'
 dayjs.extend(relativeTime);
 
 const Post = (props) => {
-    const {post, onToggleComments} = props;
+    const {post, onClickComments} = props;
 
     return (
-        <article key={post.id}>
+        <article key={post.id} onClick={() => onClickComments(post)}>
                 <div className="post-container">
                     <h3>{post.title}</h3>
                     <div className="post-text-container">

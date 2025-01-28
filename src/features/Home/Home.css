@@ -1,0 +1,22 @@
+main {
+    min-width: 50%;
+}
+
+.comments-aside {
+    min-width: calc(30% - 2em);
+}
+  
+main hr {
+    border: solid #1F1F1F 1px;
+    margin: 0 1em;
+}
+  
+.comments-aside hr {
+    border: solid #292929 1px;
+    margin: 0 1em;
+}
+
+.error, .loading-text{
+    text-align: center;
+    flex-grow: 1;
+}

@@ -8,6 +8,7 @@
 .App .body {
   display: flex;
   justify-content: space-between;
+  
 }
 
 aside {
@@ -15,24 +16,7 @@ aside {
   background-color: #1f1f1f;
   margin: 1em;
   border-radius: 8px;
+  align-self: baseline;
 }
 
-main {
-  min-width: 50%;
-}
-
-.comments-aside {
-  min-width: calc(30% - 2em);
-}
-
-main hr {
-  /* border-color: #121212; */
-  border: solid #1F1F1F 1px;
-  margin: 0 1em;
-}
-
-.comments-aside hr {
-  border: solid #292929 1px;
-  margin: 0 1em;
-}
 
