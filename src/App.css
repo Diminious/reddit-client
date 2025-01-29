@@ -31,6 +31,10 @@ a {
   color: #8a96ff;
 }
 
+a:hover {
+  color: #accafe;
+}
+
 .standard-button {
   margin: 0 1em;
   padding: 0.5em;
@@ -59,6 +63,22 @@ a {
 
 .mobile {
   display: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }
 
 @media only screen and (max-width: 600px) {

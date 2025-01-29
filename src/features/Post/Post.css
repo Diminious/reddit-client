@@ -15,11 +15,15 @@ article h3 {
     margin-top: 0;
 }
 
-.post-image-container {
+.post-text-container {
+    overflow-wrap: break-word;
+}
+
+.post-media-container {
     margin: 1rem 0;
 }
 
-.post-image {
+.post-media {
     max-width: 100%;
 }
 
