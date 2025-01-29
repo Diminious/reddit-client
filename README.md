@@ -5,7 +5,7 @@ Simply select a subreddit from the list to the left or add your own subreddits t
 
 ## Access the website
 
-[Reddit Viewer](mzreddit-viewer.netlify.app)
+[Reddit Viewer](https://mzreddit-viewer.netlify.app)
 
 # Features
 
