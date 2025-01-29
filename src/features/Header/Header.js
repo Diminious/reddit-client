@@ -41,7 +41,7 @@ const Header = () => {
             </form>
             <form className="search desktop" >
                 <input type="text" className="standard-input" placeholder="Search something!" value={searchTermLocal} onChange={onSearchTermChange}/>
-                <button type="submit" disabled={searchTermLocal <= 0} onClick={onSearchTermSubmit} className="standard-button">Search</button>
+                <button type="submit" onClick={onSearchTermSubmit} className="standard-button">Search</button>
             </form>
         </header>
     )

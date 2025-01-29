@@ -21,8 +21,6 @@ const Home = () => {
         dispatch(fetchPosts(selectedSubreddit));
         dispatch(setSearchTerm(''));
         setSelectedPost(null);
-        console.log("HOME UseEffect");
-        
     }, [selectedSubreddit, dispatch])
 
     //when clicking a post gets comments and displays them
@@ -100,6 +98,7 @@ const Home = () => {
     return (
         <>
             <main>
+                <h2 className="mobile">{selectedSubreddit}</h2>
                 {posts.map((post, index) => {
                     return (
                         <>
