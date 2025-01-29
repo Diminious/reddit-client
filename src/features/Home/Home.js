@@ -21,6 +21,8 @@ const Home = () => {
         dispatch(fetchPosts(selectedSubreddit));
         dispatch(setSearchTerm(''));
         setSelectedPost(null);
+        console.log("HOME UseEffect");
+        
     }, [selectedSubreddit, dispatch])
 
     //when clicking a post gets comments and displays them

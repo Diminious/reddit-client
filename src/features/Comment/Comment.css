@@ -17,3 +17,9 @@
 .comment-author {
     font-weight: bold;
 }
+
+@media only screen and (max-width: 600px) {
+    .comment-metadata {
+        flex-direction: column;
+    }
+}

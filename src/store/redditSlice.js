@@ -6,7 +6,7 @@ const initialState = {
     error: false,
     isLoading: false,
     searchTerm: '',
-    selectedSubreddit: "/r/PhoebeMains", //default subreddit to appear on the page
+    selectedSubreddit: "/r/pics", //default subreddit to appear on the page
 };
 
 const redditSlice = createSlice({

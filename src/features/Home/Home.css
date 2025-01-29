@@ -21,3 +21,14 @@ main hr {
     text-align: center;
     flex-grow: 1;
 }
+
+@media only screen and (max-width: 900px) {
+    .comments-aside {
+        font-size: 0.8rem;
+        min-width: calc(45% - 2em);
+    }
+
+    main {
+        font-size: 0.8rem;
+    }
+}

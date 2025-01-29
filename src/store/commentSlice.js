@@ -39,8 +39,6 @@ export const {
 export default commentSlice.reducer;
 
 export const fetchComments = (index, permalink) => async (dispatch) => {
-    console.log("FetchComments");
-    
     try {
         dispatch(startGetComments(index));
         const comments = await getPostComments(permalink);
