@@ -8,6 +8,7 @@ article {
 
 article:hover {
     background-color: #1F1F1F;
+    cursor: pointer;
 }
 
 article h3 {

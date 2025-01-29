@@ -10,6 +10,15 @@
   justify-content: space-between;
 }
 
+@media only screen and (max-width: 1100px)  {
+  .desktop {
+    display: none;
+  }
+  .App header {
+    font-size: 0.5em;
+  }
+}
+
 aside {
   min-width: calc(20% - 2em);
   background-color: #1f1f1f;
@@ -22,6 +31,37 @@ aside {
   max-height: calc(100vh - 2em);
 }
 
+aside hr {
+  border: solid #292929 1px;
+  margin: 0 1em;
+}
+
 a {
   color: #8a96ff;
+}
+
+.standard-button {
+  margin: 0 1em;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: none;
+  background-color: #F0F0F0;
+}
+
+.standard-button:hover {
+  background-color: #ADADAD;
+}
+
+.standard-button:active {
+  background-color:  #6A6A6A;
+}
+
+.standard-button:disabled {
+  background-color: #F0F0F0;
+}
+
+.standard-input {
+  padding: 0.5em;
+  border-radius: 4px;
+  border: none;
 }

@@ -17,6 +17,7 @@
     color: white;
     background-color: #1F1F1F;
     text-align: right;
+    cursor: pointer;
 }
 
 .subreddits-list button:hover {
@@ -27,6 +28,41 @@
     background-color: #292929;
 }
 
-.selected-subreddit {
+.selected-subreddit button {
     background-color: #292929;
+}
+
+.userAdded button{
+    display: flex;
+    justify-content: space-between;
+}
+
+.userAdded span {
+    color: lightblue;
+    cursor: pointer;
+}
+
+.add-subreddit {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-subreddit input {
+    margin: 0.5rem 1rem;
+}
+
+.add-subreddit button {
+    margin: 0.5rem;
+    max-width: 50%;
+    align-self: center;
+}
+
+.remove-button:hover {
+    font-weight:bolder;
+    color: #EE3C3C;
+    scale: 1.5;
+}
+
+.nonexistant button {
+    color: #EE3C3C;
 }

@@ -19,29 +19,17 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(fetchPosts(selectedSubreddit));
+        dispatch(setSearchTerm(''));
+        setSelectedPost(null);
     }, [selectedSubreddit, dispatch])
 
     //when clicking a post gets comments and displays them
     const onClickComments = (post) => {
-        
         setSelectedPost(post)
-        // const index = post.permalink;
-        // console.log(index);
-        
-
-        // const getComments = (permalink) => {
-        //     console.log("getComments");
-            
-        //     dispatch(fetchComments(index, permalink));
-        // }
-
-
-        // return getComments;
     }
 
     useEffect(() => {
         if (selectedPost === null) return;
-        console.log("Effect: GetComments");
         
         dispatch(fetchComments(selectedPost.permalink, selectedPost.permalink));
     }, [selectedPost, dispatch])
@@ -65,13 +53,13 @@ const Home = () => {
             </div>
         )
 
-        
-
         return (
             <div>
-                <hr/>
-                {commentsState.comments?.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
+                {commentsState.comments?.map((comment, index) => (
+                    <>
+                        {index > 0? <hr/>: null}
+                        <Comment comment={comment} key={comment.id} />
+                    </>
                 ))}
             </div>
         )
@@ -88,7 +76,8 @@ const Home = () => {
         return (
             <div className="error">
                 <h2>Failed to load posts.</h2>
-                <button type="button" onClick={() => dispatch(fetchPosts(selectedSubreddit))}>
+                <p>Check the subreddit name was entered correctly.</p>
+                <button type="button" className="standard-button" onClick={() => dispatch(fetchPosts(selectedSubreddit))}>
                     Try Again
                 </button>
             </div>
@@ -99,7 +88,7 @@ const Home = () => {
         return (
             <div className="error">
                 <h2>No posts matching "{searchTerm}"</h2>
-                <button type="button" onClick={() => dispatch(setSearchTerm(''))}>
+                <button type="button" className="standard-button" onClick={() => dispatch(setSearchTerm(''))}>
                     Go Back
                 </button>
             </div>

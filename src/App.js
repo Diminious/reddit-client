@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Header />
       <div className='body'>
-        <aside>
+        <aside className='desktop'>
           <Subreddits />
         </aside>
         <Home />

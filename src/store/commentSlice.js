@@ -25,7 +25,7 @@ const commentSlice = createSlice({
         getCommentsFailed(state) {
             state.commentsLoading = false;
             state.commentsError = true;
-        },
+        }
     }
 });
 
@@ -44,12 +44,8 @@ export const fetchComments = (index, permalink) => async (dispatch) => {
     try {
         dispatch(startGetComments(index));
         const comments = await getPostComments(permalink);
-        console.log("Comments: " + comments);
-      
         dispatch(getCommentsSuccess({ index, comments }));
     } catch (error) {
-        console.error(error);
-        
         dispatch(getCommentsFailed(index));
     }
 };
