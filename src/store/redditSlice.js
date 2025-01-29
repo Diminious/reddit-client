@@ -6,7 +6,7 @@ const initialState = {
     error: false,
     isLoading: false,
     searchTerm: '',
-    selectedSubreddit: "/r/pics", //default subreddit to appear on the page
+    selectedSubreddit: "/r/pics/", //default subreddit to appear on the page
 };
 
 const redditSlice = createSlice({
@@ -53,17 +53,7 @@ export const fetchPosts = (subreddit) => async (dispatch) => {
     try {
         dispatch(startGetPosts());
         const posts = await getSubredditPosts(subreddit);
-  
-        // We are adding showingComments and comments as additional fields to handle showing them when the user wants to. We need to do this because we need to call another API endpoint to get the comments for each post.
-        const postsWithMetadata = posts.map((post) => ({
-            ...post,
-            showingComments: false,
-            comments: [],
-            loadingComments: false,
-            errorComments: false,
-        }));
-        
-        dispatch(getPostsSuccess(postsWithMetadata));
+        dispatch(getPostsSuccess(posts));
     } catch (error) {
         dispatch(getPostsFailed());
     }
